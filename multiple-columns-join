@@ -1,0 +1,29 @@
+#!/usr/bin/ruby
+require 'optparse'
+opt = OptionParser.new
+
+_1 = []
+_2 = []
+opt.on('-1 [VAL]') {|v| _1 << v }
+opt.on('-2 [VAL]') {|v| _2 << v }
+opt.parse!(ARGV)
+
+_1.map!{|v| v.to_i - 1}
+_2.map!{|v| v.to_i - 1}
+
+enum1 = File.open(ARGV[0], 'r').each
+enum2 = File.open(ARGV[1], 'r').each
+
+loop do
+  a1 = enum1.peek.split(' ').values_at(*_1)
+  a2 = enum2.peek.split(' ').values_at(*_2)
+
+  case a1 <=> a2
+  when -1
+    then enum1.next
+  when 0
+    then puts [enum1.next.chomp, enum2.next.chomp].join(' ')
+  when 1
+    then enum2.next
+  end
+end

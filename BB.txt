@@ -1,0 +1,4 @@
+labelA AA 1 Category1
+labelB BB 1 Category2
+labelC CC 4 Category3
+labelD DD 5 Category4
